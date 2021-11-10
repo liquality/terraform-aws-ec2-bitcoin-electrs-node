@@ -27,7 +27,7 @@ EOF
 }
 
 resource "aws_iam_policy" "ec2_ebs_policy" {
-  name = "BTCMainnetEBSFullAccess"
+  name = join("", [local.node_alias, "-ebs-full-access"])
 
   policy = <<EOF
 {
