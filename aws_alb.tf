@@ -7,7 +7,8 @@ resource "aws_alb" "main" {
   subnets            = data.terraform_remote_state.vpc.outputs.public_subnets
 
   security_groups = [
-    data.terraform_remote_state.vpc.outputs.sg_http_80_id # port 80
+    data.terraform_remote_state.vpc.outputs.sg_http_80_id,  # port 80
+    data.terraform_remote_state.vpc.outputs.sg_http_3000_id # electrs rpc
   ]
 
   internal = false
@@ -55,5 +56,5 @@ resource "aws_lb_target_group" "main" {
 resource "aws_lb_target_group_attachment" "main" {
   target_group_arn = aws_lb_target_group.main.arn
   target_id        = aws_instance.main.id
-  port             = 3000
+  port             = 80
 }
