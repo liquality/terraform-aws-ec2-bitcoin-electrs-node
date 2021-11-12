@@ -52,8 +52,8 @@ resource "aws_lb_target_group" "main" {
   tags = local.tags
 }
 
-resource "aws_alb_target_group_attachment" "main" {
-  target_group_arn = aws_alb_target_group.main.arn
+resource "aws_lb_target_group_attachment" "main" {
+  target_group_arn = aws_lb_target_group.main.arn
   target_id        = aws_instance.main.id
   port             = 3000
 }
