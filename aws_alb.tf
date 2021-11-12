@@ -7,8 +7,7 @@ resource "aws_alb" "main" {
   subnets            = data.terraform_remote_state.vpc.outputs.public_subnets
 
   security_groups = [
-    data.terraform_remote_state.vpc.outputs.sg_http_80_id,  # port 80
-    data.terraform_remote_state.vpc.outputs.sg_http_3000_id # electrs rpc
+    data.terraform_remote_state.vpc.outputs.sg_http_80_id # port 80
   ]
 
   internal = false
@@ -21,10 +20,8 @@ resource "aws_alb" "main" {
 # ------------------------------------------------------------------------------
 resource "aws_lb_listener" "main" {
   load_balancer_arn = aws_alb.main.arn
-  # port              = 80
-
-  port     = 3000
-  protocol = "HTTP"
+  port              = 80
+  protocol          = "HTTP"
 
   default_action {
     type             = "forward"
