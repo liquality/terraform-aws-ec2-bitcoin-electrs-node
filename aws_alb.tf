@@ -4,7 +4,7 @@
 resource "aws_alb" "main" {
   name               = local.node_alias
   load_balancer_type = "application"
-  subnets            = [data.terraform_remote_state.vpc.outputs.public_subnets[0]] # availability zone: a
+  subnets            = data.terraform_remote_state.vpc.outputs.public_subnets
 
   security_groups = [
     data.terraform_remote_state.vpc.outputs.sg_http_80_id # port 80
