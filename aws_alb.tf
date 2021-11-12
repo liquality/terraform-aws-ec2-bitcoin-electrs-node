@@ -34,7 +34,7 @@ resource "aws_lb_target_group" "main" {
   port        = 3000 # electrs rpc
   protocol    = "HTTP"
   vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
-  target_type = "ip"
+  target_type = "instance"
 
   depends_on = [aws_alb.main]
 
@@ -50,4 +50,10 @@ resource "aws_lb_target_group" "main" {
   }
 
   tags = local.tags
+}
+
+resource "aws_alb_target_group_attachment" "main" {
+  target_group_arn = aws_alb_target_group.main.arn
+  target_id        = aws_instance.main.id
+  port             = 3000
 }
