@@ -34,7 +34,7 @@ resource "aws_api_gateway_resource" "electrs_rpc_proxy" {
 resource "aws_api_gateway_method" "electrs_rpc_proxy" {
   rest_api_id   = aws_api_gateway_rest_api.main.id
   resource_id   = aws_api_gateway_resource.electrs_rpc_proxy.id
-  http_method   = "ANY"
+  http_method   = "GET"
   authorization = "NONE"
 
   request_parameters = {
@@ -49,7 +49,7 @@ resource "aws_api_gateway_integration" "electrs_rpc" {
 
   # Proxy all uri paths
   type                    = "HTTP_PROXY"
-  integration_http_method = "ANY"
+  integration_http_method = "GET"
   uri                     = "http://${aws_eip.lb.public_ip}:3000/{proxy}"
 
   request_parameters = {
