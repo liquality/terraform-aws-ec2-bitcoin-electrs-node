@@ -5,9 +5,7 @@ resource "aws_instance" "main" {
   ami           = var.ec2_ami_id
   instance_type = var.ec2_instance_type
 
-  associate_public_ip_address = true
-
-  subnet_id = data.terraform_remote_state.vpc.outputs.public_subnets[0] # availability zone: a
+  subnet_id = data.terraform_remote_state.vpc.outputs.private_subnets[0] # availability zone: a
 
   vpc_security_group_ids = [
     data.terraform_remote_state.vpc.outputs.sg_ssh_id,       # SSH access
