@@ -1,5 +1,5 @@
 locals {
-  node_alias         = "node-bitcoin-electrs-${var.chain_network_name}"
+  node_alias         = "node-bitcoin-electrs-${var.chain_network_name}${var.deployment_id}"
   vpc_workspace_name = "aws-networking-infra-${var.env_alias}"
 }
 

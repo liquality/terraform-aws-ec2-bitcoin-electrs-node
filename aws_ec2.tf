@@ -28,6 +28,8 @@ resource "aws_instance" "main" {
   key_name = var.ec2_ssh_key_pair_name
 
   root_block_device {
+    volume_size = 60
+
     tags = merge(
       local.tags,
       {
