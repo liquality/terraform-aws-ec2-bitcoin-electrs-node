@@ -21,3 +21,8 @@ variable "backend_organization" {
   type        = string
   description = "The terraform backend organization for the target VPC networking layer."
 }
+
+variable "deployment_id" {
+  type        = string
+  description = "Deployment identifier for namespacing resources."
+}
